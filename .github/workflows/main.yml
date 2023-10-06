@@ -15,7 +15,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
 
-      - run: "git branch --track main origin/main"
-      - run: yarn nx affected:lint --base=${{ github.base_ref }} --head=${{ github.head_ref }}
-      - run: yarn nx affected:test --base=${{  github.base_ref }} --head=${{ github.head_ref }}
-      - run: yarn nx affected:build --base=${{  github.base_ref }} --head=${{ github.head_ref }}
+      - run: npx nx format:check
+      - run: npx nx affected:lint --parallel=3
+      - run: npx nx affected:test --parallel=3
+      - run: npx nx affected:build --parallel=3
