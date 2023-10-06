@@ -9,24 +9,13 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump Base Branch Context
-        env:
-          BASE_BRANCH: ${{github.base_ref}}
-        run: echo "$BASE_BRANCH"
-
-      - name: Dump Branch Context
-        env:
-          BRANCH: ${{github.head_ref }}
-        run: echo "$BRANCH"
-
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
 
-      - run: "git branch --track ${{github.base_ref}} origin/${{github.base_ref}}"
-      - run: "git branch --track ${{github.head_ref}} origin/${{github.head_ref}}"
+      - run: "git branch --track main origin/main"
       - run: yarn nx affected:lint --base=${{ github.base_ref }} --head=${{ github.head_ref }}
       - run: yarn nx affected:test --base=${{  github.base_ref }} --head=${{ github.head_ref }}
       - run: yarn nx affected:build --base=${{  github.base_ref }} --head=${{ github.head_ref }}
