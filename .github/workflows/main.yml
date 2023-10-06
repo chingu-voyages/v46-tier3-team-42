@@ -15,7 +15,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
 
-      - run: npx nx format:check
+      - run: npx nx format:check --base=origin/main
       - run: npx nx affected:lint --parallel=3
       - run: npx nx affected:test --parallel=3
       - run: npx nx affected:build --parallel=3
