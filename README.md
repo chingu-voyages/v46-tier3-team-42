@@ -1,18 +1,157 @@
-# voyage-tasks
+# 🚀 voyage-tasks
 
-- [voyage-tasks](#voyage-tasks)
-  - [Chingu Documentation](#chingu-documentation)
-    - [Team Documents](#team-documents)
-  - [Nx Workspace](#nx-workspace)
-    - [Generate code](#generate-code)
-    - [Running tasks](#running-tasks)
-    - [Want better Editor Integration?](#want-better-editor-integration)
-    - [Ready to deploy?](#ready-to-deploy)
-    - [Set up CI!](#set-up-ci)
-    - [Connect with us!](#connect-with-us)
+- [🚀 voyage-tasks](#-voyage-tasks)
+  - [📚 Project Description](#-project-description)
+  - [🏗️ Architecture](#️-architecture)
+  - [📝 Requirements](#-requirements)
+  - [🏃‍♂️ Get started](#️-get-started)
+  - [🛠️ How Nx Works](#️-how-nx-works)
+    - [➕ Additional Commands](#-additional-commands)
+      - [📦 Adding Dependencies](#-adding-dependencies)
+      - [🧪 Running Tests](#-running-tests)
+      - [🔍 Linting](#-linting)
+      - [🌐 Building for Production](#-building-for-production)
+    - [🎩 Tips and Tricks](#-tips-and-tricks)
+  - [📖 Chingu Documentation](#-chingu-documentation)
 
 
-## Chingu Documentation
+## 📚 Project Description
+
+A platform that allows users to input their monthly utility bills and track their energy consumption. The system would offer suggestions on how to reduce energy costs based on data analysis, as well as compare a user's consumption to regional or national averages.
+
+## 🏗️ Architecture
+
+![Architecture](./docs/img/graph.png)
+- **web-frontend**: The frontend of the application, built with React. (User interface, etc.)
+- **api-backend**: The backend of the application, built with FastAPI. (Authentication, Database, etc.)
+- **ml-backend**: The machine learning backend of the application, built with FastAPI. (Data analysis, etc.)
+
+## 📝 Requirements 
+
+- [Node.js](https://nodejs.org/en/) (v18)
+- [Python](https://www.python.org/) (v3.9 or higher)
+- [Poetry](https://python-poetry.org/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+## 🏃‍♂️ Get started
+
+1. Clone this repo
+
+```bash
+git clone git@github.com:chingu-voyages/v46-tier3-team-42.git
+```
+
+2. Install dependencies
+
+```bash
+# To install dependencies for the frontend
+npm install
+# To install dependencies for the api backend
+npx nx run api-backend:install
+# To install dependencies for the ml backend
+npx nx run ml-backend:install
+```
+
+3. Run the app
+
+```bash
+# To work on the frontend
+npx nx run web-frontend:serve:development
+# To work on the api backend
+npx nx run api-backend:serve:development
+# To work on the ml backend
+npx nx run ml-backend:serve:development
+```
+
+## 🛠️ How Nx Works
+
+**Nx** is a powerful, extensible dev tools workspace for monorepos. With Nx, you can develop multiple full-stack applications holistically and share code between them, all while keeping everything fast and maintainable.
+
+### ➕ Additional Commands
+
+#### 📦 Adding Dependencies
+
+If you want to add dependencies specific to a certain app or library, you can do so by specifying the project:
+
+```bash
+# Add dependency to the frontend
+npx nx add --project=web-frontend [YOUR_PACKAGE_NAME]
+
+# Add dependency to the api backend
+npx nx add --project=api-backend [YOUR_PACKAGE_NAME]
+
+# Add dependency to the ml backend
+npx nx add --project=ml-backend [YOUR_PACKAGE_NAME]
+```
+
+#### 🧪 Running Tests
+
+Nx comes with built-in test configuration, making it easy to test individual projects:
+
+```bash
+# Run tests for the frontend
+npx nx test web-frontend
+
+# Run tests for the api backend
+npx nx test api-backend
+
+# Run tests for the ml backend
+npx nx test ml-backend
+```
+
+#### 🔍 Linting
+
+Ensure your code follows best practices and stays consistent:
+
+```bash
+# Lint the frontend
+npx nx lint web-frontend
+
+# Lint the api backend
+npx nx lint api-backend
+
+# Lint the ml backend
+npx nx lint ml-backend
+```
+
+#### 🌐 Building for Production
+
+When you're ready to deploy:
+
+```bash
+# Build the frontend for production
+npx nx build web-frontend --prod
+
+# Build the api backend for production
+npx nx build api-backend --prod
+
+# Build the ml backend for production
+npx nx build ml-backend --prod
+```
+
+### 🎩 Tips and Tricks
+
+- **Use affected commands**: Nx can determine which apps and libs are affected by a certain change. For instance, if you made a change to a shared library, you can run tests only for the apps that are affected by this change:
+
+```bash
+npx nx affected:test
+```
+
+- **Generating Code**: Nx provides various generators to help scaffold components, modules, services, and more:
+
+```bash
+npx nx generate @nrwl/react:component myComponent --project=web-frontend
+```
+
+- **Interactive Console**: You can access the Nx Console, an interactive UI for Nx commands, by running:
+
+```bash
+npx nx console
+```
+
+## 📖 Chingu Documentation
+
 Your project's `readme` is as important to success as your code. For 
 this reason you should put as much care into its creation and maintenance
 as you would any other component of the application.
@@ -23,72 +162,3 @@ written by an experienced Chingu, be your starting point -
 
 And before we go there's "one more thing"! Once you decide what to include
 in your `readme` feel free to replace the text we've provided here.
-
-> Own it & Make it your Own!
-
-### Team Documents
-
-You may find these helpful as you work together to organize your project.
-
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
-
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
-
-## Nx Workspace
-### Generate code
-
-If you happen to use Nx plugins, you can leverage code generators that might come with it.
-
-Run `nx list` to get a list of available plugins and whether they have generators. Then run `nx list <plugin-name>` to see what generators are available.
-
-Learn more about [Nx generators on the docs](https://nx.dev/plugin-features/use-code-generators).
-
-### Running tasks
-
-To execute tasks with Nx use the following syntax:
-
-```
-nx <target> <project> <...options>
-```
-
-You can also run multiple targets:
-
-```
-nx run-many -t <target1> <target2>
-```
-
-..or add `-p` to filter specific projects
-
-```
-nx run-many -t <target1> <target2> -p <proj1> <proj2>
-```
-
-Targets can be defined in the `package.json` or `projects.json`. Learn more [in the docs](https://nx.dev/core-features/run-tasks).
-
-### Want better Editor Integration?
-
-Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provides autocomplete support, a UI for exploring and running tasks & generators, and more! Available for VSCode, IntelliJ and comes with a LSP for Vim users.
-
-### Ready to deploy?
-
-Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready to be deployed.
-
-### Set up CI!
-
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
-
-- [Set up remote caching](https://nx.dev/core-features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/core-features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
-
-### Connect with us!
-
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
