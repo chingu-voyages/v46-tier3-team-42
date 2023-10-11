@@ -76,13 +76,16 @@ If you want to add dependencies specific to a certain app or library, you can do
 
 ```bash
 # Add dependency to the frontend
-npx nx add --project=web-frontend [YOUR_PACKAGE_NAME]
+npm install [YOUR_PACKAGE_NAME]
+npm install [YOUR_PACKAGE_NAME] --save-dev
 
 # Add dependency to the api backend
-npx nx add --project=api-backend [YOUR_PACKAGE_NAME]
+npx nx run api-backend:add --name [YOUR_PACKAGE_NAME]
+npx nx run api-backend:add --name [YOUR_PACKAGE_NAME] --group dev
 
 # Add dependency to the ml backend
-npx nx add --project=ml-backend [YOUR_PACKAGE_NAME]
+npx nx run ml-backend:add --name [YOUR_PACKAGE_NAME]
+npx nx run ml-backend:add --name [YOUR_PACKAGE_NAME] --group dev
 ```
 
 #### 🧪 Running Tests

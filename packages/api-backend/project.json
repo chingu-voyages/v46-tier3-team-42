@@ -33,6 +33,13 @@
         "bundleLocalDependencies": true
       }
     },
+    "serve": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "poetry run uvicorn main:app --reload",
+        "cwd": "packages/api-backend"
+      }
+    },
     "install": {
       "executor": "@nxlv/python:install",
       "options": {

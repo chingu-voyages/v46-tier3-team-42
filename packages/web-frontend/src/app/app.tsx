@@ -1,52 +1,61 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
-
-import NxWelcome from './nx-welcome';
-
 import { Route, Routes, Link } from 'react-router-dom';
+import { ClerkProvider, RedirectToSignIn, SignIn, SignedIn, SignedOut } from '@clerk/clerk-react';
+
+if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+function Home() {
+  return (
+    <div>
+      <h1>Home</h1>
+      <Link to="/dashboard">Dashboard</Link>
+    </div>
+  );
+}
+
+function Dasboard() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <Link to="/">Home</Link>
+    </div>
+  );
+}
 
 export function App() {
   return (
-    <div>
-      <NxWelcome title="web-frontend" />
-
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
-      </div>
+    <ClerkProvider publishableKey={clerkPubKey}>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
-            </div>
-          }
+        <Route 
+          path="/sign-in/*"
+          element={<SignIn routing="path" path="/sign-in" />}
         />
         <Route
-          path="/page-2"
+          path="/sign-up/*"
+          element={<SignIn routing="path" path="/sign-up" />}
+        />
+        <Route 
+          path="/" 
+          element={<Home />}
+        />
+        <Route 
+          path="/dashboard" 
           element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
+            <>
+              <SignedIn>
+                <Dasboard />
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
           }
         />
       </Routes>
-      {/* END: routes */}
-    </div>
+    </ClerkProvider>
   );
 }
 
