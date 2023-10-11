@@ -1,5 +1,5 @@
 from sqlalchemy import  Column, Integer, String
-from db_config import Base
+from api_backend.db import Base
 
 
 class Tip(Base):
